@@ -28,19 +28,29 @@ import java.util.List;
 
 public class Lobby extends AppCompatActivity {
     private Button up_btn1;
-    private ChildEventListener  mChild;
-    ArrayList<Posting> DataList;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference myRef;
+    private ChildEventListener mChild;
+
+    private ListView mListView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lobby);
+        Posting posting = new Posting();
+        //FireBase 실시간 DB 관리 얻어오기
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        //저장시킬 노드 참조객체 가져오기
+        DatabaseReference myRef = firebaseDatabase.getReference(); //()안에 아무것도 안쓰면 최상위 노드
 
-        //이쪽은 일시적 오류때문에 주석처리해놓음
-/*
+        final ArrayList<Posting> Arrpostings = new ArrayList<>();
+        PostingAdapter PostingAdapter = new PostingAdapter();
         ListView mListView = (ListView) findViewById(R.id.lobby_list);
-        final ArrayAdapter adapter = new ArrayAdapter<Posting>(this,R.layout.list_item,DataList);
+
+        ArrayAdapter<Posting> adapter = new ArrayAdapter(this,R.layout.list_item,Arrpostings);
+        mListView.setAdapter(PostingAdapter);
 
 
         //리스트 아이템 클릭시 작동 (작성)
@@ -49,20 +59,20 @@ public class Lobby extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), ListContents.class);
 
-                intent.putExtra("Title", DataList.get(position).getTitle());
-                intent.putExtra("writer", DataList.get(position).getName());
-                intent.putExtra("image", DataList.get(position).getImages());
-                intent.putExtra("contents", DataList.get(position).getContents());
-                intent.putExtra("status", DataList.get(position).getStatus());
-                intent.putExtra("date", DataList.get(position).getDate());
-                intent.putExtra("password", DataList.get(position).getPassword());
+                intent.putExtra("Title", posting.get(position).Title);
+                intent.putExtra("writer", posting.get(position).Name);
+                intent.putExtra("image", posting.get(position).Images);
+                intent.putExtra("contents", posting.get(position).Contents);
+                intent.putExtra("status", posting.get(position).Status);
+                intent.putExtra("date", posting.get(position).Date);
+                intent.putExtra("password", posting.get(position).Password);
+
+
                 startActivity(intent);
             }
+        });//작성끝
 
 
-        });
-
-*/
 
 
 

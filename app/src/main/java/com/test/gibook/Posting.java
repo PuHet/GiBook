@@ -25,8 +25,6 @@ public class Posting {
     public Posting() {
 
     }
-
-    //이쪽 부분 주석처리 하니까 DB로 업로드 잘됨
 /*
     public String getTitle() {
         return this.Title;
@@ -49,6 +47,6 @@ public class Posting {
     public String getPassword() {
         return this.Password;
     }
-
     */
+
 }

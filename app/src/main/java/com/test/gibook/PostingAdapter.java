@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class PostingAdapter extends BaseAdapter {
-    private ArrayList<Posting> postings = new ArrayList<Posting>();
+    private ArrayList<Posting> postings = new ArrayList<>();
 
     //생성자
     public PostingAdapter() {
@@ -25,7 +25,7 @@ public class PostingAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        final int i = position;
+       final int i = position;
         Context context = viewGroup.getContext();
 
         if (view == null) {
@@ -40,12 +40,15 @@ public class PostingAdapter extends BaseAdapter {
 
         Posting posting = (Posting) getItem(i);
 
+
         titleView.setText(posting.Title);
         statusView.setText(posting.Status);
         nameView.setText(posting.Name);
         dateView.setText(posting.Date);
 
         //view.setOnClickListener();
+
+
 
         return view;
     }

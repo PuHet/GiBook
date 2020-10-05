@@ -56,7 +56,7 @@ public class ListContents extends AppCompatActivity {
         contents_date.setText(intent.getStringExtra("date")); // 날짜 형식을 yyyy/mm/dd로 바꿔야함
         contents_status.setText(intent.getStringExtra("status"));
         final String password = (intent.getStringExtra("password"));
-        //작성끝
+
 
 
         //메인으로 버튼 클릭시
@@ -72,6 +72,7 @@ public class ListContents extends AppCompatActivity {
         //비밀번호 일치시 버튼 활성화
         sold_out_btn = findViewById(R.id.sold_out_btn);
         sold_out_btn.setEnabled(false);
+        //비활성화시 버튼색깔 회색으로 할 예정
         if(password.equals(contents_Password))
         {
             Toast.makeText(getApplicationContext(),"비밀번호가 일치합니다.", Toast.LENGTH_SHORT).show();
@@ -81,6 +82,7 @@ public class ListContents extends AppCompatActivity {
         {
             Toast.makeText(getApplicationContext(),"비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
             sold_out_btn.setEnabled(false);
+
         }
         //활성화된 기부완료 버튼 클릭시
         sold_out_btn.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +91,7 @@ public class ListContents extends AppCompatActivity {
                 contents_status.setText("기부완료");
                 contents_status.setTextColor(0xB2B2B2B2); //회색
             }
-        });
+        });//작성끝
 
     }//메인 괄호
 }
