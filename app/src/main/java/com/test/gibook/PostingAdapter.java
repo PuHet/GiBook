@@ -10,62 +10,60 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class PostingAdapter extends BaseAdapter {
-    private ArrayList<Posting> postings = new ArrayList<>();
+    // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
+    private ArrayList<Posting> postingList = new ArrayList<>();
 
-    //생성자
+    // 생성자
     public PostingAdapter() {
 
     }
 
+    // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
     @Override
     public int getCount() {
-        return postings.size();
+        return postingList.size() ;
     }
 
-
+    // position에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴. : 필수 구현
     @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
-       final int i = position;
-        Context context = viewGroup.getContext();
+    public View getView(int position, View convertView, ViewGroup parent) {
+        final int pos = position;
+        final Context context = parent.getContext();
 
-        if (view == null) {
+        // "listview_item" Layout을 inflate하여 convertView 참조 획득.
+        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.list_item, viewGroup, false);
+            convertView = inflater.inflate(R.layout.list_item, parent, false);
         }
 
-        TextView titleView = (TextView) view.findViewById(R.id.title);
-        TextView statusView = (TextView) view.findViewById(R.id.status);
-        TextView nameView = (TextView) view.findViewById(R.id.name);
-        TextView dateView = (TextView) view.findViewById(R.id.date);
+        TextView titleView = (TextView) convertView.findViewById(R.id.title);
+        TextView statusView = (TextView) convertView.findViewById(R.id.status);
+        TextView nameView = (TextView) convertView.findViewById(R.id.name);
+        TextView dateView = (TextView) convertView.findViewById(R.id.date);
 
-        Posting posting = (Posting) getItem(i);
-
-
+        Posting posting = postingList.get(position);
         titleView.setText(posting.Title);
         statusView.setText(posting.Status);
         nameView.setText(posting.Name);
         dateView.setText(posting.Date);
 
-        //view.setOnClickListener();
-
-
-
-        return view;
+        return convertView;
     }
+
+    // 지정한 위치(position)에 있는 데이터와 관계된 아이템(row)의 ID를 리턴. : 필수 구현
     @Override
-    public Object getItem(int i) {
-
-        return postings.get(i);
+    public long getItemId(int position) {
+        return position;
     }
 
+    // 지정한 위치(position)에 있는 데이터 리턴 : 필수 구현
     @Override
-    public long getItemId(int i) {
-
-        return i;
+    public Object getItem(int position) {
+        return postingList.get(position);
     }
 
-
+    // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
     public void addItem(Posting posting) {
-        postings.add(posting);
+        postingList.add(posting);
     }
 }

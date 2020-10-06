@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,28 +30,41 @@ import java.util.List;
 public class Lobby extends AppCompatActivity {
     private Button up_btn1;
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference myRef;
+    private DatabaseReference ref;
     private ChildEventListener mChild;
-
     private ListView mListView;
+    private PostingAdapter adapter;
 
+    private void addListView() {
+        ref.orderByKey().limitToLast(10).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Posting posting = ds.getValue(Posting.class);
+                    adapter.addItem(posting);
+                }
+                mListView.setAdapter(adapter);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lobby);
-        Posting posting = new Posting();
         //FireBase 실시간 DB 관리 얻어오기
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         //저장시킬 노드 참조객체 가져오기
-        DatabaseReference myRef = firebaseDatabase.getReference(); //()안에 아무것도 안쓰면 최상위 노드
+        ref = firebaseDatabase.getReference(); //()안에 아무것도 안쓰면 최상위 노드
 
-        final ArrayList<Posting> Arrpostings = new ArrayList<>();
-        PostingAdapter PostingAdapter = new PostingAdapter();
-        ListView mListView = (ListView) findViewById(R.id.lobby_list);
-
-        ArrayAdapter<Posting> adapter = new ArrayAdapter(this,R.layout.list_item,Arrpostings);
-        mListView.setAdapter(PostingAdapter);
+        adapter = new PostingAdapter();
+        mListView = (ListView) findViewById(R.id.lobby_list);
+        mListView.setAdapter(adapter);
+        addListView();
 
 
         //리스트 아이템 클릭시 작동 (작성)
@@ -59,23 +73,18 @@ public class Lobby extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), ListContents.class);
 
-                intent.putExtra("Title", posting.get(position).Title);
-                intent.putExtra("writer", posting.get(position).Name);
-                intent.putExtra("image", posting.get(position).Images);
-                intent.putExtra("contents", posting.get(position).Contents);
-                intent.putExtra("status", posting.get(position).Status);
-                intent.putExtra("date", posting.get(position).Date);
-                intent.putExtra("password", posting.get(position).Password);
-
+                Posting posting = (Posting) mListView.getItemAtPosition(position);
+                intent.putExtra("Title", posting.Title);
+                intent.putExtra("writer", posting.Name);
+                intent.putExtra("image", posting.Images);
+                intent.putExtra("contents", posting.Contents);
+                intent.putExtra("status", posting.Status);
+                intent.putExtra("date", posting.Date);
+                intent.putExtra("password", posting.Password);
 
                 startActivity(intent);
             }
         });//작성끝
-
-
-
-
-
 
 
         //글쓰기 버튼 클릭시
