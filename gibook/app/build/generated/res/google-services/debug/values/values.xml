@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">152142986577-mm8uj3vj4l9mvi4gplea9hk87sqah2gl.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://ansan-84003.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">152142986577</string>
+    <string name="google_api_key" translatable="false">AIzaSyDkd5BsXrFNwMZQYImbry1kPb9rQzHwah8</string>
+    <string name="google_app_id" translatable="false">1:152142986577:android:7ed57932ff0c6955d22770</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDkd5BsXrFNwMZQYImbry1kPb9rQzHwah8</string>
+    <string name="google_storage_bucket" translatable="false">ansan-84003.appspot.com</string>
+    <string name="project_id" translatable="false">ansan-84003</string>
+</resources>
