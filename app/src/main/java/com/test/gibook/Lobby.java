@@ -66,7 +66,6 @@ public class Lobby extends AppCompatActivity {
         mListView.setAdapter(adapter);
         addListView();
 
-
         //리스트 아이템 클릭시 작동 (작성)
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -81,11 +80,12 @@ public class Lobby extends AppCompatActivity {
                 intent.putExtra("status", posting.Status);
                 intent.putExtra("date", posting.Date);
                 intent.putExtra("password", posting.Password);
+                intent.putExtra("Position",posting.Push);
+                intent.putExtra("Image_Name",posting.Image_Name);
 
                 startActivity(intent);
             }
         });//작성끝
-
 
         //글쓰기 버튼 클릭시
         up_btn1 = findViewById(R.id.up_btn1);

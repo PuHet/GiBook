@@ -7,12 +7,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class PostingAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
     private ArrayList<Posting> postingList = new ArrayList<>();
-
+    private String now1;
     // 생성자
     public PostingAdapter() {
 
@@ -45,7 +47,15 @@ public class PostingAdapter extends BaseAdapter {
         titleView.setText(posting.Title);
         statusView.setText(posting.Status);
         nameView.setText(posting.Name);
-        dateView.setText(posting.Date);
+        //인텐트로 시간 받아옴
+        now1 = posting.Date;
+        Date date2 = new Date(now1);
+        // 정해준 형식으로 date1 변수에 저장한다.
+        SimpleDateFormat date1 = new SimpleDateFormat("yyyy/MM/dd");
+        date1.format(date2);
+        //TextView에 날짜 삽입
+        //contents_date.setText(date1.format(date2));
+        dateView.setText(date1.format(date2));
 
         return convertView;
     }

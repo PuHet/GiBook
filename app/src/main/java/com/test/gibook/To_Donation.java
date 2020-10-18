@@ -62,7 +62,6 @@ public class To_Donation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to__donation);
 
-
         //시간 출력 설정
         TimeZone tz = TimeZone.getTimeZone ("Asia/Seoul");
         // 현재시간을 msec 으로 구한다.
@@ -75,7 +74,6 @@ public class To_Donation extends AppCompatActivity {
         sdfNow.setTimeZone(tz);
         // nowDate 변수에 값을 저장한다.
         final String formatDate = sdfNow.format(date);
-
 
         Donation_title = (EditText) findViewById(R.id.Donation_title);
         Donation_name = findViewById(R.id.Donation_name);
@@ -93,7 +91,7 @@ public class To_Donation extends AppCompatActivity {
                 StorageReference storageReference = storage.getReference();
                 //Storage 경로 설정
                 final StorageReference imageReference = storageReference.child("images/" + UUID.randomUUID().toString());
-
+                final String Images = UUID.randomUUID().toString();
                 Bitmap bitmap = ((BitmapDrawable) Donation_image.getDrawable()).getBitmap();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
@@ -114,8 +112,15 @@ public class To_Donation extends AppCompatActivity {
                         result.addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
+                                //FireBase 실시간 DB 관리 얻어오기
+                                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                                //저장시킬 노드 참조객체 가져오기
+                                DatabaseReference myRef = firebaseDatabase.getReference(); //()안에 아무것도 안쓰면 최상위 노드
+                                //별도의 키 없이 값(value)만 저장하기
                                 String downloadUrl = uri.toString();
                                 Posting posting = new Posting();
+                                //PUSH값으로 노드 만들기
+                                String key1 = myRef.push().getKey();
                                 //EditText에 있는 문자 얻어오기
                                 posting.Title = Donation_title.getText().toString();
                                 posting.Name = Donation_name.getText().toString();
@@ -124,12 +129,10 @@ public class To_Donation extends AppCompatActivity {
                                 posting.Images = downloadUrl;
                                 posting.Date  = formatDate;
                                 posting.Status  = "기부중)";
-                                //FireBase 실시간 DB 관리 얻어오기
-                                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                                //저장시킬 노드 참조객체 가져오기
-                                DatabaseReference myRef = firebaseDatabase.getReference(); //()안에 아무것도 안쓰면 최상위 노드
-                                //별도의 키 없이 값(value)만 저장하기
-                                myRef.push().setValue(posting);
+                                posting.Push  = key1;
+                                posting.Image_Name  = Images;
+                                //키값으로 게시글 작성 등록
+                                myRef.child(key1).setValue(posting);
 
                                 Intent intent = new Intent(To_Donation.this, Lobby.class);
                                 startActivity(intent);
@@ -153,36 +156,9 @@ public class To_Donation extends AppCompatActivity {
             }
         });
 
-
-
-
-
     }//메인 괄호
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //카메라 버튼 동작
-    //btn_camera = findViewById(R.id.btn_camera);
-
     public void showCameraBtn(View view) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, 1);
