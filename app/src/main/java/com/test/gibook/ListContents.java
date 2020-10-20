@@ -17,10 +17,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -58,7 +61,6 @@ public class ListContents extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
             }
-
             @Override
             protected Bitmap doInBackground(String arg) {
                 Bitmap image = null;
@@ -71,22 +73,17 @@ public class ListContents extends AppCompatActivity {
                 }
                 return image;
             }
-
             @Override
             protected void onPostExecute(Bitmap result) {
                 iv.setImageBitmap(result);
             }
         }.execute(url);
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listcontents);
-
         Intent intent = getIntent();
-
-
         final Posting posting = new Posting();
         contents_writer = findViewById(R.id.contents_writer );
         contents_title = findViewById(R.id.contents_title );
@@ -95,7 +92,6 @@ public class ListContents extends AppCompatActivity {
         contents_date= findViewById(R.id.contents_date);
         contents_status= findViewById(R.id.contents_status);
         contents_Password = findViewById(R.id.contents_Password);
-
         //인텐트 이미지 URL로 불러오기(작성)
         img = intent.getStringExtra("image");
         //인텐트 DATA 띄워주기
@@ -103,7 +99,6 @@ public class ListContents extends AppCompatActivity {
         contents_writer.setText(intent.getStringExtra("writer"));
         contents_title.setText(intent.getStringExtra("Title"));
         contents_contents.setText(intent.getStringExtra("contents"));
-
         //인텐트로 시간 받아옴
         now1 = intent.getStringExtra("date");
         Date date2 = new Date(now1);
@@ -123,8 +118,7 @@ public class ListContents extends AppCompatActivity {
         final DatabaseReference myRef = firebaseDatabase.getReference(); //()안에 아무것도 안쓰면 최상위 노드
         //FirebaseStorage 레퍼런스 생성
         final FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageReference = storage.getReference();
-
+        final StorageReference storageReference = storage.getReference().child("images/"+Image_Name);
         //메인으로 버튼 클릭시
         lobby_btn1 = findViewById(R.id.lobby_btn1);
         lobby_btn1.setOnClickListener(new View.OnClickListener() {
@@ -132,14 +126,12 @@ public class ListContents extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ListContents.this, Lobby.class);
                 startActivity(intent);
-
             }
         });
         //비밀번호 버튼 비활성화
         sold_out_btn = findViewById(R.id.sold_out_btn);
         sold_out_btn.setEnabled(false);
         sold_out_btn.setBackgroundColor(0xB2B2B2B2);
-
         //SwipeRefreshLayout 새로고침 기능
         mSwipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -164,7 +156,6 @@ public class ListContents extends AppCompatActivity {
                                 contents_status.setTextColor(0xB2B2B2B2);
                                 sold_out_btn.setEnabled(false);//버튼 비활성화
                                  */
-
                                 //활성화된 기부완료 버튼 클릭시
                                 AlertDialog.Builder dlg = new AlertDialog.Builder(ListContents.this);
                                 dlg.setTitle("기부해주셔서 감사합니다."); //제목
@@ -175,7 +166,17 @@ public class ListContents extends AppCompatActivity {
                                                 //토스트 메시지
                                                 Toast.makeText(ListContents.this,"게시글이 삭제됩니다.",Toast.LENGTH_SHORT).show();
                                                 //스토리지 사진 삭제 구문
-                                               // storage.getReference().child("images/").child(Image_Name).delete();
+                                                storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                   @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                       Toast.makeText(ListContents.this,"게시글이 삭제되었습니다.",Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception exception) {
+                                                        Toast.makeText(ListContents.this,"게시글이 삭제에 실패했습니다.",Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
                                                 myRef.child(positionToRemove).removeValue();
                                                 Intent intent = new Intent(ListContents.this, Lobby.class);
                                                 startActivity(intent);
@@ -193,16 +194,9 @@ public class ListContents extends AppCompatActivity {
                 }
             }
         });
-
-
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-
-
     }//메인 괄호
-
-
-
 }

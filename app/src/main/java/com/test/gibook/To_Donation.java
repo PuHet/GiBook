@@ -56,12 +56,10 @@ public class To_Donation extends AppCompatActivity {
     private EditText Donation_password;
     private EditText Donation_contents;
     private ImageView Donation_image;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to__donation);
-
         //시간 출력 설정
         TimeZone tz = TimeZone.getTimeZone ("Asia/Seoul");
         // 현재시간을 msec 으로 구한다.
@@ -74,13 +72,11 @@ public class To_Donation extends AppCompatActivity {
         sdfNow.setTimeZone(tz);
         // nowDate 변수에 값을 저장한다.
         final String formatDate = sdfNow.format(date);
-
         Donation_title = (EditText) findViewById(R.id.Donation_title);
         Donation_name = findViewById(R.id.Donation_name);
         Donation_password = findViewById(R.id.Donation_password);
         Donation_contents = findViewById(R.id.Donation_contents);
         Donation_image = findViewById(R.id.Donation_image);
-
         up_btn = findViewById(R.id.up_btn);
         up_btn.setOnClickListener(new View.OnClickListener() {
 
@@ -90,13 +86,13 @@ public class To_Donation extends AppCompatActivity {
                 FirebaseStorage storage = FirebaseStorage.getInstance();
                 StorageReference storageReference = storage.getReference();
                 //Storage 경로 설정
-                final StorageReference imageReference = storageReference.child("images/" + UUID.randomUUID().toString());
-                final String Images = UUID.randomUUID().toString();
+                final String Images1 = UUID.randomUUID().toString();
+                final StorageReference imageReference = storageReference.child("images/" + Images1);
+                //final String Images = UUID.randomUUID().toString();
                 Bitmap bitmap = ((BitmapDrawable) Donation_image.getDrawable()).getBitmap();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
                 byte[] imageArr = baos.toByteArray();
-
                 // 이미지 업로드
                 final UploadTask uploadTask = imageReference.putBytes(imageArr);
                 uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -130,10 +126,9 @@ public class To_Donation extends AppCompatActivity {
                                 posting.Date  = formatDate;
                                 posting.Status  = "기부중)";
                                 posting.Push  = key1;
-                                posting.Image_Name  = Images;
+                                posting.Image_Name  = Images1;
                                 //키값으로 게시글 작성 등록
                                 myRef.child(key1).setValue(posting);
-
                                 Intent intent = new Intent(To_Donation.this, Lobby.class);
                                 startActivity(intent);
                             }
@@ -144,7 +139,6 @@ public class To_Donation extends AppCompatActivity {
 
 
         });
-
         //메인으로 버튼 동작
         re_btn = findViewById(R.id.re_btn);
         re_btn.setOnClickListener(new View.OnClickListener() {
@@ -152,21 +146,16 @@ public class To_Donation extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(To_Donation.this, Lobby.class);
                 startActivity(intent);
-
             }
         });
-
     }//메인 괄호
-
     //카메라 버튼 동작
     public void showCameraBtn(View view) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, 1);
     }
-
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (resultCode == RESULT_OK) {
             Bitmap bitmap = (Bitmap) data.getParcelableExtra("data");
             Donation_image.setImageBitmap(bitmap);

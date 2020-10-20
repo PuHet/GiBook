@@ -16,7 +16,6 @@ public class Posting {
     public String Date;
     public String Push;
     public String Image_Name;
-
     // 생성자
     public Posting(String name, String title, String password, String contents, String images, String status, String date, String push,String image_Name) {
         this.Name = name;
@@ -40,32 +39,9 @@ public class Posting {
         result.put("기부완료", this.Status);
         return result;
     }
+*/
 
- */
 
 
-/*
-    public String getTitle() {
-        return this.Title;
-    }
-    public String getName() {
-        return this.Name;
-    }
-    public String getDate() {
-        return this.Date;
-    }
-    public String getStatus() {
-        return this.Status;
-    }
-    public String getImages() {
-        return this.Images;
-    }
-    public String getContents() {
-        return this.Contents;
-    }
-    public String getPassword() {
-        return this.Password;
-    }
-    */
 
 }
