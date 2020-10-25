@@ -56,6 +56,7 @@ public class ListContents extends AppCompatActivity {
     private String ETpassword;
     private String img;
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    private ImageView imageView;
     private void setImage(final ImageView iv, final String url) {
         new ThreadTask<String, Bitmap>() {
             @Override
@@ -151,7 +152,6 @@ public class ListContents extends AppCompatActivity {
                                 /*
                                 Map<String, Object> result = new HashMap<String, Object>();
                                 myRef.updateChildren(result);
-
                                 contents_status.setText("기부완료");
                                 contents_status.setTextColor(0xB2B2B2B2);
                                 sold_out_btn.setEnabled(false);//버튼 비활성화
@@ -198,5 +198,15 @@ public class ListContents extends AppCompatActivity {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+        //메인 버튼 클릭시
+        imageView = findViewById(R.id.imageView);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListContents.this, MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
     }//메인 괄호
 }

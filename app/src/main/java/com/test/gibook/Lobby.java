@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -34,6 +35,7 @@ public class Lobby extends AppCompatActivity {
     private ChildEventListener mChild;
     private ListView mListView;
     private PostingAdapter adapter;
+    private ImageView imageView;
 
     private void addListView() {
         ref.orderByKey().limitToLast(10).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -93,6 +95,17 @@ public class Lobby extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Lobby.this, To_Donation.class);
+                startActivity(intent);
+
+            }
+        });
+
+        //메인 버튼 클릭시
+        imageView = findViewById(R.id.imageView);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Lobby.this, MainActivity.class);
                 startActivity(intent);
 
             }

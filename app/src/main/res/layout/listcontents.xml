@@ -16,7 +16,7 @@
 
 
         <ImageView
-
+            android:id="@+id/imageView"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
@@ -65,12 +65,10 @@
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"
-
             android:shadowRadius="0"
             android:text="메인으로   "
             android:textColor="@color/colorBlack"
             android:textSize="23dp"
-
             />
 
         <View

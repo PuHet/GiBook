@@ -8,6 +8,12 @@
     android:gravity="center"
     tools:context=".MainActivity" >
 
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:gravity="center"
+        app:srcCompat="@drawable/au1" />
+
     <TextView
         android:id="@+id/tv"
         android:layout_width="match_parent"

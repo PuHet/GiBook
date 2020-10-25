@@ -56,6 +56,7 @@ public class To_Donation extends AppCompatActivity {
     private EditText Donation_password;
     private EditText Donation_contents;
     private ImageView Donation_image;
+    private ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,6 +146,16 @@ public class To_Donation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(To_Donation.this, Lobby.class);
+                startActivity(intent);
+            }
+        });
+
+        //메인 버튼 클릭시
+        imageView = findViewById(R.id.imageView);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(To_Donation.this, MainActivity.class);
                 startActivity(intent);
             }
         });
