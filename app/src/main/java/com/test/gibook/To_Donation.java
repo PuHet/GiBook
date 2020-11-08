@@ -119,10 +119,9 @@ public class To_Donation extends AppCompatActivity {
                                         final String Images1 = UUID.randomUUID().toString();
                                         //Storage 경로 설정
                                         final StorageReference imageReference = storageReference.child("images/" + Images1);
-                                        Donation_image.setImageResource(0);
                                         Bitmap bitmap = ((BitmapDrawable) Donation_image.getDrawable()).getBitmap();
                                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                        bitmap.compress(Bitmap.CompressFormat.PNG, 200, baos);
+                                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
                                         byte[] imageArr = baos.toByteArray();
                                         // 이미지 업로드
                                         final UploadTask uploadTask = imageReference.putBytes(imageArr);

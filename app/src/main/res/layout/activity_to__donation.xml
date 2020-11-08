@@ -38,13 +38,11 @@
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"
-
-
             android:shadowRadius="0"
             android:text="등록  "
             android:textColor="@color/colorWhite"
             android:textSize="35dp"
-
+            android:layout_margin="10dp"
             />
     </LinearLayout>
     <LinearLayout
@@ -183,7 +181,7 @@
                         android:id="@+id/file_btn"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/ar_camera"
+                        android:background="@drawable/folder"
                         android:onClick="showCameraBtn" />
 
                     <View
