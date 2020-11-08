@@ -1,12 +1,15 @@
 package com.test.gibook;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.icu.text.CaseMap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.BoringLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,8 +21,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresPermission;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -80,6 +85,7 @@ public class ListContents extends AppCompatActivity {
             }
         }.execute(url);
     }
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,7 +138,6 @@ public class ListContents extends AppCompatActivity {
         //비밀번호 버튼 비활성화
         sold_out_btn = findViewById(R.id.sold_out_btn);
         sold_out_btn.setEnabled(false);
-        sold_out_btn.setBackgroundColor(0xB2B2B2B2);
         //SwipeRefreshLayout 새로고침 기능
         mSwipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -141,13 +146,15 @@ public class ListContents extends AppCompatActivity {
                 if (contents_Password != null) {
                     ETpassword = contents_Password.getText().toString();
                     if (password.equals(ETpassword)) {
+                        //기부완료 버튼 변경
+                        sold_out_btn.setBackgroundResource(R.drawable.buttonshape);
                         Toast.makeText(getApplicationContext(), "비밀번호가 일치합니다.", Toast.LENGTH_SHORT).show();
                         sold_out_btn.setEnabled(true);
-                        sold_out_btn.setBackgroundColor(0x73C773);
                         //활성화된 기부완료 버튼 클릭시
                         sold_out_btn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+
                                 //기부완료 활성화 기능
                                 /*
                                 Map<String, Object> result = new HashMap<String, Object>();
@@ -156,6 +163,7 @@ public class ListContents extends AppCompatActivity {
                                 contents_status.setTextColor(0xB2B2B2B2);
                                 sold_out_btn.setEnabled(false);//버튼 비활성화
                                  */
+
                                 //활성화된 기부완료 버튼 클릭시
                                 AlertDialog.Builder dlg = new AlertDialog.Builder(ListContents.this);
                                 dlg.setTitle("기부해주셔서 감사합니다."); //제목

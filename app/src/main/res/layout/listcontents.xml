@@ -35,7 +35,6 @@
             android:layout_height="75dp"
             android:background="@drawable/buttonshape2"
             android:layout_gravity="right"
-            android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="0"
@@ -54,6 +53,7 @@
         android:orientation="horizontal"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
+        android:background="@color/colorWhite"
         >
 
         <Button
@@ -73,7 +73,8 @@
 
         <View
             android:layout_width="100dp"
-            android:layout_height="30dp" />
+            android:layout_height="30dp"
+            android:background="@color/colorWhite"/>
 
         <EditText
             android:id="@+id/contents_Password"
@@ -154,10 +155,6 @@
 
          </LinearLayout>
 
-
-
-
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="30dp" />
@@ -165,7 +162,9 @@
             <ImageView
                 android:id="@+id/contents_images"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="300dp"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"/>
 
             <TextView
                 android:id="@+id/contents_contents"
