@@ -37,20 +37,32 @@
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="260dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:text="이재강"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:ems="7"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+             />
 
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="viewEnd"
+
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
             android:text="2020.01.03"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:layout_gravity="right"
+           />
     </LinearLayout>
 </LinearLayout>

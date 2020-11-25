@@ -5,18 +5,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class PostingAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
     private ArrayList<Posting> postingList = new ArrayList<>();
     private String now1;
+    private ListView mListView;
+    private PostingAdapter adapter;
     // 생성자
-    public PostingAdapter() {
+    public PostingAdapter(ListView mListView) {
+        this.mListView = mListView;
     }
     // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
     @Override
@@ -66,4 +71,34 @@ public class PostingAdapter extends BaseAdapter {
     public void addItem(Posting posting) {
         postingList.add(posting);
     }
+
+/*
+    // Filter Class
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        mListView.clear();
+        if (charText.length() == 0) {
+            adapter = new PostingAdapter(mListView);
+            mListView.setAdapter(adapter);
+            addListView();
+        }
+        else
+        {
+            for (WorldPopulation wp : arraylist)
+            {
+                if (wp.getCountry().toLowerCase(Locale.getDefault()).contains(charText))
+                {
+                    worldpopulationlist.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    private void addListView() {
+    }
+
+
+ */
+
 }

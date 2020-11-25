@@ -20,12 +20,14 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
@@ -63,17 +65,15 @@ public class To_Donation extends AppCompatActivity {
     private ImageView Donation_image;
     private ImageView imageView; //기북 타이틀
     private final int GET_GALLERY_IMAGE = 200;
-    final String Title = "";
-    final String Name = "";
-    final String Contents = "";
-    final String Password = "";
-    final String Image = "";
     String i = "0";
     Bitmap bitmap = null;
+    private ProgressBar pgsBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to__donation);
+
+        pgsBar = (ProgressBar) findViewById(R.id.pBar);
 
         //시간 출력 설정
         TimeZone tz = TimeZone.getTimeZone ("Asia/Seoul");
@@ -92,14 +92,7 @@ public class To_Donation extends AppCompatActivity {
         Donation_password = findViewById(R.id.Donation_password);
         Donation_contents = findViewById(R.id.Donation_contents);
         Donation_image = findViewById(R.id.Donation_image);
-        /*
-        //이미지뷰 숨김
-        if (Donation_image.getDrawable() == null) {
-            Donation_image.setVisibility(View.GONE);
-        } else if (Donation_image.getDrawable() != null) {
-            Donation_image.setVisibility(View.VISIBLE);
-        }
-         */
+        final LoadingDialog loadingDialog = new LoadingDialog(To_Donation.this);
         up_btn = findViewById(R.id.up_btn);
                         up_btn.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -116,6 +109,8 @@ public class To_Donation extends AppCompatActivity {
                                     StorageReference storageReference = storage.getReference();
                                         //사진 유무 확인
                                     if (Donation_image.getDrawable() != null) {
+                                        //로딩 바 입장
+                                        loadingDialog.startLoadingDialog();
                                         final String Images1 = UUID.randomUUID().toString();
                                         //Storage 경로 설정
                                         final StorageReference imageReference = storageReference.child("images/" + Images1);
@@ -159,6 +154,8 @@ public class To_Donation extends AppCompatActivity {
                                                         //키값으로 게시글 작성 등록
                                                         myRef.child(key1).setValue(posting);
                                                         Intent intent = new Intent(To_Donation.this, Lobby.class);
+                                                        //로딩바 퇴장
+                                                        loadingDialog.dismissDialog();
                                                         startActivity(intent);
                                                     }
                                                 });
