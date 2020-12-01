@@ -13,7 +13,6 @@
         android:orientation="horizontal"
         android:background="@color/colorMain">
 
-
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="180dp"
@@ -25,7 +24,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
-
 
         <Button
             android:id="@+id/up_btn1"
@@ -39,24 +37,18 @@
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="0"
-            android:text="+"
+            android:text="기부"
             android:textColor="@color/colorWhite"
-            android:textSize="45dp" />
+            android:textSize="25dp" />
+
     </LinearLayout>
-
-
-    <EditText
-        android:id="@+id/editTextFilter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="20"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:textSize="20dp"/>
 
     <ListView
         android:id="@+id/lobby_list"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"/>
 
 </LinearLayout>

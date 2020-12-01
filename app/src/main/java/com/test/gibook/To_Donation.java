@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.PeriodicSync;
@@ -24,10 +25,13 @@ import android.os.Handler;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
@@ -66,12 +70,28 @@ public class To_Donation extends AppCompatActivity {
     private ImageView imageView; //기북 타이틀
     private final int GET_GALLERY_IMAGE = 200;
     String i = "0";
-    Bitmap bitmap = null;
     private ProgressBar pgsBar;
+    int department;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to__donation);
+
+        final Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.Spinner, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                department = spinner.getSelectedItemPosition();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         pgsBar = (ProgressBar) findViewById(R.id.pBar);
 
@@ -102,8 +122,9 @@ public class To_Donation extends AppCompatActivity {
                               String Name = Donation_name.getText().toString();
                               String Contents = Donation_contents.getText().toString();
                               String Password = Donation_password.getText().toString();
+                              // 학과 선택 값
                                 //각 게시글정보의 길이값으로 입력 유무 비교
-                                if ( Title.getBytes().length > 0  &&  Name.getBytes().length > 0 &&  Contents.getBytes().length > 0 &&  Password.getBytes().length > 0) {
+                                if ( Title.getBytes().length > 0  &&  Name.getBytes().length > 0 &&  Contents.getBytes().length > 0 &&  Password.getBytes().length > 0 && department != 0) {
                                     //FirebaseStorage 레퍼런스 생성
                                     FirebaseStorage storage = FirebaseStorage.getInstance();
                                     StorageReference storageReference = storage.getReference();
@@ -148,7 +169,14 @@ public class To_Donation extends AppCompatActivity {
                                                         posting.Contents = Donation_contents.getText().toString();
                                                         posting.Images = downloadUrl;
                                                         posting.Date = formatDate;
-                                                        posting.Status = "기부중)";
+                                                        if(department == 1)
+                                                        {
+                                                            posting.Department = "전체";
+                                                        }
+                                                        else if (department != 1)
+                                                        {
+                                                            posting.Department = spinner.getSelectedItem().toString();
+                                                        }
                                                         posting.Push = key1;
                                                         posting.Image_Name = Images1;
                                                         //키값으로 게시글 작성 등록
@@ -175,7 +203,7 @@ public class To_Donation extends AppCompatActivity {
                                         dlg.show();
                                     }
                                 }
-                                if ( Title.getBytes().length <= 0  ||  Name.getBytes().length <= 0 ||  Contents.getBytes().length <= 0 ||  Password.getBytes().length <= 0 || Donation_image == null){
+                                if ( Title.getBytes().length <= 0  ||  Name.getBytes().length <= 0 ||  Contents.getBytes().length <= 0 ||  Password.getBytes().length <= 0 || Donation_image == null || department == 0){
                                     //빈칸 있을시
                                     AlertDialog.Builder dlg = new AlertDialog.Builder(To_Donation.this);
                                     dlg.setTitle("입력하지 않은 정보가 있습니다."); //제목
@@ -247,5 +275,16 @@ public class To_Donation extends AppCompatActivity {
         Donation_image.setImageResource(0);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, 1);
+    }
+    public class SpinnerActivity extends Activity implements AdapterView.OnItemSelectedListener {
+
+
+        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+
+        }
+
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
     }
    }

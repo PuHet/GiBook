@@ -6,10 +6,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -53,6 +55,8 @@ public class Lobby extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lobby);
+
+
         //FireBase 실시간 DB 관리 얻어오기
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         //저장시킬 노드 참조객체 가져오기
@@ -62,6 +66,7 @@ public class Lobby extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.lobby_list);
         mListView.setAdapter(adapter);
         addListView();
+
 
         //리스트 아이템 클릭시 작동 (작성)
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -74,7 +79,7 @@ public class Lobby extends AppCompatActivity {
                 intent.putExtra("writer", posting.Name);
                 intent.putExtra("image", posting.Images);
                 intent.putExtra("contents", posting.Contents);
-                intent.putExtra("status", posting.Status);
+                intent.putExtra("department", posting.Department);
                 intent.putExtra("date", posting.Date);
                 intent.putExtra("password", posting.Password);
                 intent.putExtra("Position",posting.Push);
@@ -105,37 +110,6 @@ public class Lobby extends AppCompatActivity {
 
             }
         });
-
-
-        final EditText editTextFilter = (EditText)findViewById(R.id.editTextFilter) ;
-
-        editTextFilter.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void afterTextChanged(Editable arg0) {
-                // TODO Auto-generated method stub
-                String text = editTextFilter.getText().toString().toLowerCase(Locale.getDefault());
-               // adapter.filter(text);
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1,
-                                          int arg2, int arg3) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void onTextChanged(CharSequence arg0, int arg1, int arg2,
-                                      int arg3) {
-                // TODO Auto-generated method stub
-            }
-        });
-
-
-
-
-
-
 
     }//메인 괄호
 

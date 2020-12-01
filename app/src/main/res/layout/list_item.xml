@@ -11,9 +11,9 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/status"
-            android:text="기부중)"
-            android:textSize="25dp"
+            android:id="@+id/department"
+            android:text="학과이름"
+            android:textSize="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -21,10 +21,10 @@
             android:textStyle="bold"/>
         <TextView
             android:id="@+id/title"
-            android:text="책 기부 기부 기부 기북 기북 기북"
+            android:text="책 제목이 들어갈 예정입니다"
             android:maxLines="1"
             android:ellipsize="end"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp" />

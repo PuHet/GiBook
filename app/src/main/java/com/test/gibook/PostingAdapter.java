@@ -39,12 +39,12 @@ public class PostingAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.list_item, parent, false);
         }
         TextView titleView = (TextView) convertView.findViewById(R.id.title);
-        TextView statusView = (TextView) convertView.findViewById(R.id.status);
+        TextView departmentView = (TextView) convertView.findViewById(R.id.department);
         TextView nameView = (TextView) convertView.findViewById(R.id.name);
         TextView dateView = (TextView) convertView.findViewById(R.id.date);
         Posting posting = postingList.get(position);
         titleView.setText(posting.Title);
-        statusView.setText(posting.Status);
+        departmentView.setText(posting.Department);
         nameView.setText(posting.Name);
         //인텐트로 시간 받아옴
         now1 = posting.Date;
@@ -71,34 +71,4 @@ public class PostingAdapter extends BaseAdapter {
     public void addItem(Posting posting) {
         postingList.add(posting);
     }
-
-/*
-    // Filter Class
-    public void filter(String charText) {
-        charText = charText.toLowerCase(Locale.getDefault());
-        mListView.clear();
-        if (charText.length() == 0) {
-            adapter = new PostingAdapter(mListView);
-            mListView.setAdapter(adapter);
-            addListView();
-        }
-        else
-        {
-            for (WorldPopulation wp : arraylist)
-            {
-                if (wp.getCountry().toLowerCase(Locale.getDefault()).contains(charText))
-                {
-                    worldpopulationlist.add(wp);
-                }
-            }
-        }
-        notifyDataSetChanged();
-    }
-
-    private void addListView() {
-    }
-
-
- */
-
 }

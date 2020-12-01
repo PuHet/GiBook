@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Spinner">
+        <item>학과 선택</item>
+        <item>없음</item>
+        <item>간호학과</item>
+        <item>임상병리과</item>
+        <item>방사선학과</item>
+        <item>물리치료학과</item>
+        <item>뷰티아트과</item>
+        <item>의료미용과</item>
+        <item>보건의료정보학과</item>
+        <item>식품영양학과</item>
+        <item>호텔조리학과</item>
+
+        <item>유아교육과</item>
+        <item>보육과</item>
+        <item>사회복직과</item>
+        <item>항공관광영어과</item>
+        <item>호텔관광학과</item>
+
+        <item>항공비서사무과</item>
+        <item>세무회계학과</item>
+        <item>경영학과</item>
+
+        <item>금융정보학과</item>
+        <item>IT융합비즈니스과</item>
+        <item>컴퓨터정보학과</item>
+        <item>IT응용보안과</item>
+        <item>디지털정보통신과</item>
+
+        <item>멀티미디어디자인과</item>
+        <item>건축디자인과</item>
+        <item>시각미디어디자인과</item>
+    </string-array>
+</resources>
