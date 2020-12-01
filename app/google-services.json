@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "152142986577",
-    "firebase_url": "https://ansan-84003.firebaseio.com",
-    "project_id": "ansan-84003",
-    "storage_bucket": "ansan-84003.appspot.com"
+    "project_number": "730410290201",
+    "firebase_url": "https://chekgibu-22588.firebaseio.com",
+    "project_id": "chekgibu-22588",
+    "storage_bucket": "chekgibu-22588.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:152142986577:android:7ed57932ff0c6955d22770",
+        "mobilesdk_app_id": "1:730410290201:android:aab4676114a72ef45a6e88",
         "android_client_info": {
           "package_name": "com.test.gibook"
         }
       },
       "oauth_client": [
         {
-          "client_id": "152142986577-mm8uj3vj4l9mvi4gplea9hk87sqah2gl.apps.googleusercontent.com",
+          "client_id": "730410290201-s5ks72bje9589l3aos2273dq8sprbpi1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDkd5BsXrFNwMZQYImbry1kPb9rQzHwah8"
+          "current_key": "AIzaSyCCaiBhfeKVWZyIxpJypyI1cCFDwgxlj7g"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "152142986577-mm8uj3vj4l9mvi4gplea9hk87sqah2gl.apps.googleusercontent.com",
+              "client_id": "730410290201-s5ks72bje9589l3aos2273dq8sprbpi1.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
