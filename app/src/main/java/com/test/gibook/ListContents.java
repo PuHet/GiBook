@@ -54,7 +54,7 @@ public class ListContents extends AppCompatActivity {
     private TextView contents_contents;
     private ImageView contents_images;
     private TextView contents_date;
-    private TextView contents_department;
+    private TextView contents_status;
     private EditText contents_Password;
     private String now1;
     private String password;
@@ -97,7 +97,7 @@ public class ListContents extends AppCompatActivity {
         contents_contents = findViewById(R.id.contents_contents );
         contents_images= findViewById(R.id.contents_images);
         contents_date= findViewById(R.id.contents_date);
-        contents_department= findViewById(R.id.contents_department);
+        contents_status= findViewById(R.id.contents_status);
         contents_Password = findViewById(R.id.contents_Password);
         //인텐트 이미지 URL로 불러오기(작성)
         img = intent.getStringExtra("image");
@@ -115,7 +115,7 @@ public class ListContents extends AppCompatActivity {
         //TextView에 날짜 삽입
         contents_date.setText(date1.format(date2));
        // 날짜 형식을 yyyy/mm/dd로 바꿔야함 (성공)
-        contents_department.setText(intent.getStringExtra("department"));
+        contents_status.setText(intent.getStringExtra("status"));
         final String password = (intent.getStringExtra("password"));
         final String positionToRemove = (intent.getStringExtra("Position"));
         final String Image_Name = (intent.getStringExtra("Image_Name"));
@@ -154,6 +154,16 @@ public class ListContents extends AppCompatActivity {
                         sold_out_btn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+
+                                //기부완료 활성화 기능
+                                /*
+                                Map<String, Object> result = new HashMap<String, Object>();
+                                myRef.updateChildren(result);
+                                contents_status.setText("기부완료");
+                                contents_status.setTextColor(0xB2B2B2B2);
+                                sold_out_btn.setEnabled(false);//버튼 비활성화
+                                 */
+
                                 //활성화된 기부완료 버튼 클릭시
                                 AlertDialog.Builder dlg = new AlertDialog.Builder(ListContents.this);
                                 dlg.setTitle("기부해주셔서 감사합니다."); //제목

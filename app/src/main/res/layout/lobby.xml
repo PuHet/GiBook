@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:orientation="horizontal"
-        android:background="@color/colorMain">
+        android:background="@color/colorBlue">
+
 
         <ImageView
             android:id="@+id/imageView"
@@ -25,30 +26,31 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
+
+
         <Button
             android:id="@+id/up_btn1"
-            android:layout_width="86dp"
+            android:layout_width="100dp"
             android:layout_height="75dp"
-            android:layout_gravity="right"
             android:background="@drawable/buttonshape"
-            android:maxLines="1"
-            android:padding="10dp"
+            android:layout_gravity="right"
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="0"
-            android:text="기부"
+            android:text="작성"
             android:textColor="@color/colorWhite"
-            android:textSize="25dp" />
-
+            android:textSize="35sp"
+            android:maxLines="1"
+            android:padding="10dp"
+            />
     </LinearLayout>
+
+
 
     <ListView
         android:id="@+id/lobby_list"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

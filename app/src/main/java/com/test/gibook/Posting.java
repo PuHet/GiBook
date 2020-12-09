@@ -12,18 +12,18 @@ public class Posting {
     public String Title;
     public String Contents;
     public String Images;
-    public String Department;
+    public String Status;
     public String Date;
     public String Push;
     public String Image_Name;
     // 생성자
-    public Posting(String name, String title, String password, String contents, String images, String department, String date, String push,String image_Name) {
+    public Posting(String name, String title, String password, String contents, String images, String status, String date, String push,String image_Name) {
         this.Name = name;
         this.Title = title;
         this.Password = password;
         this.Contents = contents;
         this.Images = images;
-        this.Department = department;
+        this.Status = status;
         this.Date = date;
         this.Push = push;
         this.Image_Name = image_Name;
@@ -32,7 +32,14 @@ public class Posting {
     public Posting() {
 
     }
-
+/*
+    @Exclude
+    public Map<String, Object> result() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("기부완료", this.Status);
+        return result;
+    }
+*/
 
 
 

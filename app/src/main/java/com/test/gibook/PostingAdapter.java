@@ -5,23 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 
 public class PostingAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
     private ArrayList<Posting> postingList = new ArrayList<>();
     private String now1;
-    private ListView mListView;
-    private PostingAdapter adapter;
     // 생성자
-    public PostingAdapter(ListView mListView) {
-        this.mListView = mListView;
+    public PostingAdapter() {
     }
     // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
     @Override
@@ -39,12 +34,12 @@ public class PostingAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.list_item, parent, false);
         }
         TextView titleView = (TextView) convertView.findViewById(R.id.title);
-        TextView departmentView = (TextView) convertView.findViewById(R.id.department);
+        TextView statusView = (TextView) convertView.findViewById(R.id.status);
         TextView nameView = (TextView) convertView.findViewById(R.id.name);
         TextView dateView = (TextView) convertView.findViewById(R.id.date);
         Posting posting = postingList.get(position);
         titleView.setText(posting.Title);
-        departmentView.setText(posting.Department);
+        statusView.setText(posting.Status);
         nameView.setText(posting.Name);
         //인텐트로 시간 받아옴
         now1 = posting.Date;

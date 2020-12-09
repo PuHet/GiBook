@@ -33,8 +33,6 @@ dependencies {
     dependencies {
         // ...
         implementation 'com.google.firebase:firebase-core:17.0.0'
-        implementation platform('com.google.firebase:firebase-bom:26.1.0')
-
 
         // Getting a "Could not find" error? Make sure that you've added
         // Google's Maven repository to your root-level build.gradle file
